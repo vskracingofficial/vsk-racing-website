@@ -20,14 +20,19 @@ create table if not exists public.registrations (
 );
 
 alter table public.registrations enable row level security;
--- Public visitors can only create an entry. Reading registrations must be done by an authenticated admin.
+-- Public visitors can only create an entry. Only the VSK administrator account can read registrations.
+drop policy if exists "public can submit registrations" on public.registrations;
+drop policy if exists "authenticated admins can read registrations" on public.registrations;
 create policy "public can submit registrations" on public.registrations for insert to anon with check (true);
-create policy "authenticated admins can read registrations" on public.registrations for select to authenticated using (true);
+create policy "VSK admin can read registrations" on public.registrations for select to authenticated
+using ((auth.jwt() ->> 'email') = 'vskracingofficial@gmail.com');
 
 insert into storage.buckets (id, name, public) values ('vsk-documents', 'vsk-documents', false)
 on conflict (id) do nothing;
+drop policy if exists "public can upload registration documents" on storage.objects;
+drop policy if exists "authenticated admins can read registration documents" on storage.objects;
 create policy "public can upload registration documents" on storage.objects for insert to anon
 with check (bucket_id = 'vsk-documents');
 
-create policy "authenticated admins can read registration documents" on storage.objects for select to authenticated
-using (bucket_id = 'vsk-documents');
+create policy "VSK admin can read registration documents" on storage.objects for select to authenticated
+using (bucket_id = 'vsk-documents' and (auth.jwt() ->> 'email') = 'vskracingofficial@gmail.com');

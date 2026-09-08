@@ -1,1 +1,36 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Registration Dashboard | VSK Racing</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class="dashboard"><header class="dashboard-header"><a class="brand" href="index.html"><span class="brand-mark">VSK</span><span>RACING<br>TEAM</span></a><a href="events.html">← BACK TO EVENTS</a></header><main class="dashboard-main"><p class="eyebrow"><span></span> ADMIN ONLY · RACE SCHOOL</p><h1>THE <em>GRID.</em></h1><section class="dashboard-summary"><div class="summary-card"><b id="total-count">0</b><span>TOTAL REGISTRATIONS</span></div><div class="summary-card"><b id="pending-count">0</b><span>AWAITING VERIFICATION</span></div><div class="summary-card"><b id="program-count">0</b><span>6-MONTH PROGRAM</span></div></section><section class="dashboard-table-wrap"><div class="dashboard-toolbar"><h2>RECENT ENTRIES</h2><span class="status-key">PAYMENT RECEIPTS NEED MANUAL REVIEW</span></div><table class="dashboard-table"><thead><tr><th>NAME</th><th>PROGRAM</th><th>CONTACT</th><th>RECEIPT</th><th>STATUS</th></tr></thead><tbody id="registration-rows"></tbody></table><div id="empty-state" class="dashboard-empty"><b>NO REGISTRATIONS YET</b>New participant entries will appear here.</div></section></main><script src="dashboard.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Dashboard | VSK Racing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="dashboard">
+    <header class="dashboard-header"><a class="brand" href="index.html"><img class="brand-logo" src="assets/vsk-racing-logo.jpg" alt="VSK Racing" /></a><a href="events.html">← BACK TO EVENTS</a></header>
+    <main class="dashboard-main">
+      <section id="login-panel" class="dashboard-login">
+        <p class="eyebrow"><span></span> ADMIN ONLY · RACE SCHOOL</p>
+        <h1>THE <em>GRID.</em></h1>
+        <p>Sign in with the VSK Racing administrator account to view participant registrations.</p>
+        <form id="admin-login" class="admin-login-form">
+          <label>EMAIL<input type="email" name="email" autocomplete="email" required></label>
+          <label>PASSWORD<input type="password" name="password" autocomplete="current-password" required></label>
+          <p id="login-error" class="login-error" hidden></p>
+          <button class="button button-primary" type="submit">SIGN IN <span>→</span></button>
+        </form>
+      </section>
+      <section id="dashboard-content" hidden>
+        <div class="dashboard-heading"><div><p class="eyebrow"><span></span> ADMIN ONLY · RACE SCHOOL</p><h1>THE <em>GRID.</em></h1></div><button id="sign-out" class="button button-outline" type="button">SIGN OUT</button></div>
+        <section class="dashboard-summary"><div class="summary-card"><b id="total-count">0</b><span>TOTAL REGISTRATIONS</span></div><div class="summary-card"><b id="pending-count">0</b><span>AWAITING VERIFICATION</span></div><div class="summary-card"><b id="program-count">0</b><span>6-MONTH PROGRAM</span></div></section>
+        <section class="dashboard-table-wrap"><div class="dashboard-toolbar"><h2>RECENT ENTRIES</h2><span class="status-key">PAYMENT RECEIPTS NEED MANUAL REVIEW</span></div><p id="dashboard-error" class="login-error" hidden></p><table class="dashboard-table"><thead><tr><th>NAME</th><th>PROGRAM</th><th>CONTACT</th><th>RECEIPT</th><th>STATUS</th></tr></thead><tbody id="registration-rows"></tbody></table><div id="empty-state" class="dashboard-empty"><b>NO REGISTRATIONS YET</b>New participant entries will appear here.</div></section>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>
